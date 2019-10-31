@@ -61,7 +61,7 @@ Return the facid, facility name, member cost, and monthly maintenance of the
 facilities in question. */
 SELECT facid, name, membercost, monthlymaintenance
 FROM Facilities
-WHERE membercost > 0 AND membercost < 0.2*monthlymaintenance
+WHERE membercost > 0 AND membercost < 0.2 * monthlymaintenance
 
 
 /*results -
@@ -144,17 +144,17 @@ the member name. */
 
 /* Condition on tennis court 1 and 2 using where statement. Join 3 table sources
 to link the member Id and facility ID */
-SELECT m.memid, concat(m.firstname, ', ', m.surname) AS fullname, b.facid, f.name
-FROM Members AS m INNER JOIN
-     Bookings AS b ON m.memid = b.memid INNER JOIN
-     Facilities AS f ON b.facid = f.facid
-WHERE f.name IN ('Tennis Court 1','Tennis Court 2')
-GROUP BY memid, fullname, facid, name
-ORDER BY fullname
+SELECT M.memid, CONCAT(M.firstname, ', ', M.surname) AS Fullname, B.facid, F.name
+FROM Members AS M
+     INNER JOIN Bookings AS B ON M.memid = B.memid 
+     INNER JOIN Facilities AS F ON B.facid = F.facid
+WHERE F.name IN ('Tennis Court 1','Tennis Court 2')
+GROUP BY M.memid, Fullname, B.facid, F.name
+ORDER BY Fullname
 
 
 /*results -
-"memid" "fullname"  "facid" "name"
+"memid" "Fullname"  "facid" "name"
 "12"  "Anne, Baker" "1" "Tennis Court 2"
 "12"  "Anne, Baker" "0" "Tennis Court 1"
 "6" "Burton, Tracy" "1" "Tennis Court 2"
@@ -215,7 +215,8 @@ Order by descending cost, and do not use any subqueries. */
 /* Condition on the specific date. Calculate the cost for each booking and
 filter out cost > 30 bookings. Keep starttime variable in the output to 
 make sure these are not duplicate bookings. */
-SELECT /*b.memid, b.slots,*/ b.starttime, /*f.facid,*/ f.name, /*f.guestcost, f.membercost,*/
+/*
+SELECT b.memid, b.slots, b.starttime, f.facid, f.name, f.guestcost, f.membercost,
        concat(m.firstname, ', ', m.surname) AS fullname,
        CASE WHEN b.memid = 0 THEN f.guestcost*b.slots
             ELSE f.membercost*b.slots
@@ -226,22 +227,40 @@ FROM Bookings AS b LEFT JOIN
 WHERE substr(b.starttime, 1, 10) = '2012-09-14'
 HAVING cost > 30
 ORDER BY cost DESC
+*/
+
+SELECT F.name AS FacilityName,
+       CONCAT(M.firstname, ', ', M.surname) AS Fullname,     
+       CASE WHEN B.memid = 0 THEN F.guestcost * B.slots
+            ELSE F.membercost * B.slots
+       END AS Cost
+FROM Bookings as B 
+     INNER JOIN Facilities AS F ON B.facid = F.facid 
+     INNER JOIN Members AS M ON B.memid = M.memid
+WHERE SUBSTR(B.starttime, 1, 10) = '2012-09-14' AND 
+      (
+        CASE WHEN B.memid = 0 THEN F.guestcost * B.slots
+             ELSE F.membercost * B.slots
+             END
+      ) > 30
+
+ORDER BY Cost DESC
 
 
 /*results -
-"starttime" "name"  "fullname"  "cost"
-"2012-09-14 11:00:00" "Massage Room 2"  "GUEST, GUEST"  "320.0"
-"2012-09-14 13:00:00" "Massage Room 1"  "GUEST, GUEST"  "160.0"
-"2012-09-14 16:00:00" "Massage Room 1"  "GUEST, GUEST"  "160.0"
-"2012-09-14 09:00:00" "Massage Room 1"  "GUEST, GUEST"  "160.0"
-"2012-09-14 17:00:00" "Tennis Court 2"  "GUEST, GUEST"  "150.0"
-"2012-09-14 19:00:00" "Tennis Court 1"  "GUEST, GUEST"  "75.0"
-"2012-09-14 14:00:00" "Tennis Court 2"  "GUEST, GUEST"  "75.0"
-"2012-09-14 16:00:00" "Tennis Court 1"  "GUEST, GUEST"  "75.0"
-"2012-09-14 09:30:00" "Squash Court"  "GUEST, GUEST"  "70.0"
-"2012-09-14 14:00:00" "Massage Room 1"  "Jemima, Farrell" "39.6"
-"2012-09-14 12:30:00" "Squash Court"  "GUEST, GUEST"  "35.0"
-"2012-09-14 15:00:00" "Squash Court"  "GUEST, GUEST"  "35.0"
+"FacilityName"  "Fullname"  "Cost"
+"Massage Room 2"  "GUEST, GUEST"  "320.0"
+"Massage Room 1"  "GUEST, GUEST"  "160.0"
+"Massage Room 1"  "GUEST, GUEST"  "160.0"
+"Massage Room 1"  "GUEST, GUEST"  "160.0"
+"Tennis Court 2"  "GUEST, GUEST"  "150.0"
+"Tennis Court 1"  "GUEST, GUEST"  "75.0"
+"Tennis Court 2"  "GUEST, GUEST"  "75.0"
+"Tennis Court 1"  "GUEST, GUEST"  "75.0"
+"Squash Court"  "GUEST, GUEST"  "70.0"
+"Massage Room 1"  "Jemima, Farrell" "39.6"
+"Squash Court"  "GUEST, GUEST"  "35.0"
+"Squash Court"  "GUEST, GUEST"  "35.0"
 */
 
 
@@ -249,6 +268,7 @@ ORDER BY cost DESC
 /* Q9: This time, produce the same result as in Q8, but using a subquery. */
 
 /* Convert the previous solution into using a subquery */
+/*
 SELECT fac.name, sday.fullname, sday.starttime,
        CASE WHEN sday.memid = 0 THEN sday.guestcost*sday.slots
             ELSE sday.membercost*sday.slots
@@ -271,22 +291,39 @@ ON fac.facid = sday.facid
 
 HAVING cost > 30
 ORDER BY cost DESC
+*/
+
+SELECT *
+FROM (
+        SELECT F.name AS FacilityName,
+               CONCAT(M.firstname, ', ', M.surname) AS Fullname,     
+               CASE WHEN B.memid = 0 THEN F.guestcost * B.slots
+                    ELSE F.membercost * B.slots
+               END AS Cost
+        FROM Bookings as B 
+             INNER JOIN Facilities AS F ON B.facid = F.facid 
+             INNER JOIN Members AS M ON B.memid = M.memid
+        WHERE SUBSTR(B.starttime, 1, 10) = '2012-09-14'
+      ) AS T
+
+WHERE T.Cost > 30
+ORDER BY T.Cost DESC
 
 
 /*results -
-"name"  "fullname"  "starttime" "cost"
-"Massage Room 2"  "GUEST, GUEST"  "2012-09-14 11:00:00" "320.0"
-"Massage Room 1"  "GUEST, GUEST"  "2012-09-14 09:00:00" "160.0"
-"Massage Room 1"  "GUEST, GUEST"  "2012-09-14 16:00:00" "160.0"
-"Massage Room 1"  "GUEST, GUEST"  "2012-09-14 13:00:00" "160.0"
-"Tennis Court 2"  "GUEST, GUEST"  "2012-09-14 17:00:00" "150.0"
-"Tennis Court 1"  "GUEST, GUEST"  "2012-09-14 19:00:00" "75.0"
-"Tennis Court 1"  "GUEST, GUEST"  "2012-09-14 16:00:00" "75.0"
-"Tennis Court 2"  "GUEST, GUEST"  "2012-09-14 14:00:00" "75.0"
-"Squash Court"  "GUEST, GUEST"  "2012-09-14 09:30:00" "70.0"
-"Massage Room 1"  "Jemima, Farrell" "2012-09-14 14:00:00" "39.6"
-"Squash Court"  "GUEST, GUEST"  "2012-09-14 12:30:00" "35.0"
-"Squash Court"  "GUEST, GUEST"  "2012-09-14 15:00:00" "35.0"
+"FacilityName"  "Fullname"  "Cost"
+"Massage Room 2"  "GUEST, GUEST"  "320.0"
+"Massage Room 1"  "GUEST, GUEST"  "160.0"
+"Massage Room 1"  "GUEST, GUEST"  "160.0"
+"Massage Room 1"  "GUEST, GUEST"  "160.0"
+"Tennis Court 2"  "GUEST, GUEST"  "150.0"
+"Tennis Court 1"  "GUEST, GUEST"  "75.0"
+"Tennis Court 2"  "GUEST, GUEST"  "75.0"
+"Tennis Court 1"  "GUEST, GUEST"  "75.0"
+"Squash Court"  "GUEST, GUEST"  "70.0"
+"Massage Room 1"  "Jemima, Farrell" "39.6"
+"Squash Court"  "GUEST, GUEST"  "35.0"
+"Squash Court"  "GUEST, GUEST"  "35.0"
 */
 
 
@@ -298,32 +335,67 @@ that there's a different cost for guests and members! */
 /* Use a subquery to find out all the booking combinations by member ID, number of slots,
 starttime, facility ID and facility name. Then calculate the revenue for each facility
 and filter out revenue < 1000 facilities. Order by decending revenue. */
-SELECT fac.facid, fac.name, 
-       sum(CASE WHEN gpd.memid = 0 THEN fac.guestcost*gpd.slots
-                ELSE fac.membercost*gpd.slots
-                END) AS revenue
-FROM Facilities AS fac
+/*
+SELECT FAC.facid, FAC.name, 
+       SUM(CASE WHEN GPD.memid = 0 THEN FAC.guestcost * GPD.slots
+                ELSE FAC.membercost * GPD.slots
+                END) AS Revenue
+FROM Facilities AS FAC
 
 	 RIGHT JOIN
 
 	(
-   	SELECT b.memid, b.slots, b.starttime, f.facid, f.name
+   	SELECT B.memid, B.slots, B.starttime, F.facid, F.name
 	
-		FROM Bookings AS b LEFT JOIN
-			   Facilities AS f ON b.facid = f.facid LEFT JOIN
-     	 	 Members AS m ON b.memid = m.memid
+		FROM Bookings AS B LEFT JOIN
+			   Facilities AS F ON B.facid = F.facid LEFT JOIN
+     	 	 Members AS M ON B.memid = M.memid
 		GROUP BY memid, slots, starttime, facid, name
-	) AS gpd
+	) AS GPD
 
-	ON fac.facid = gpd.facid
+	ON FAC.facid = PGD.facid
 
 GROUP BY facid, name
-HAVING revenue < 1000
-ORDER BY revenue DESC
+HAVING Revenue < 1000
+ORDER BY Revenue DESC
+*/
+
+
+SELECT GPD.Facid, GPD.Name, FAC.Revenue
+FROM 
+
+    (
+       SELECT F.facid, F.name
+       FROM Bookings AS B 
+            INNER JOIN Facilities AS F ON B.facid = F.facid 
+            INNER JOIN Members AS M ON B.memid = M.memid
+       GROUP BY facid, name
+   
+    ) AS GPD
+
+    LEFT JOIN
+
+    (
+       SELECT F.facid, F.name, 
+              SUM(CASE WHEN B.memid = 0 THEN F.guestcost * B.slots
+                       ELSE F.membercost * B.slots
+                       END
+                 ) AS Revenue
+       FROM Facilities AS F 
+            INNER JOIN Bookings AS B ON F.facid = B.facid 
+       GROUP BY F.facid, F.name
+
+    ) AS FAC
+
+    ON GPD.facid = FAC.facid 
+
+WHERE Revenue < 1000
+ORDER BY Revenue DESC
+
 
 
 /*results -
-"facid" "name"  "revenue"
+"Facid" "Name"  "Revenue"
 "8" "Pool Table"  "270.0"
 "7" "Snooker Table" "240.0"
 "3" "Table Tennis"  "180.0"
