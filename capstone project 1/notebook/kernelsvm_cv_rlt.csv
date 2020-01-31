@@ -1,0 +1,5 @@
+,best_estimator_,best_params_,best_score_,best_index_,candidate_params,mean_test_score,std_test_score,mean_train_score,std_train_score,split0_test_score,split1_test_score,split0_train_score,split1_train_score
+0,"SVC(C=52, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape='ovr', degree=3, gamma=0.001, kernel='rbf',
+  max_iter=-1, probability=False, random_state=123, shrinking=True,
+  tol=0.001, verbose=False)","{'kernel': 'rbf', 'gamma': 0.001, 'C': 52}",0.6916610709045239,0,"[{'kernel': 'rbf', 'gamma': 0.001, 'C': 52}, {'kernel': 'rbf', 'gamma': 0.0001, 'C': 19}]",[0.69166107 0.68857718],[0.00158402 0.00048966],[0.73112987 0.69292945],[8.14024966e-04 6.69733006e-05],[0.6900771  0.68808754],[0.69324513 0.68906685],[0.73194389 0.69299642],[0.73031584 0.69286247]
