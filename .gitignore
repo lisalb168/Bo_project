@@ -135,4 +135,4 @@ dmypy.json
 .pyre/
 
 # pytype static type analyzer
-.pytype/
+.pytype/.DS_Store
