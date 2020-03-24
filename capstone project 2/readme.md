@@ -4,11 +4,12 @@ Social media such as Facebook and Twitter play an important role in people’s l
 Many companies take advantage of the user product and service reviews data scraped from these platforms to help making 
 marketing decisions or find opportunities to improve customer experience, which will eventually increase customer retention 
 rate. In this project, we perform sentiment classification leveraging an airline sentiment dataset provided by figure-eight 
-website [1].
+website in the url given in the last section.
 ## Data Visualization
 
 
-![Airline Company by Sentiment](/figures/Airline Company by Sentiment.jpg)
+
+![](Airline Company by Sentiment.jpg)
 ## Modeling
 Some commonly used NLP feature extraction techniques such as CountVectorizer and N-Grams, TF-IDF Vectorizer from Scikit-learn, 
 and Word2Vec from Gensim are explored. Within each framework, we fit classification models such as Random Forest, 
