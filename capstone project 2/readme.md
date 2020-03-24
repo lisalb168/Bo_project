@@ -8,8 +8,11 @@ website in the url given in the last section.
 ## Data Visualization
 
 
+<img src="Airline Company by Sentiment.png"
+     alt="Airline Company by Sentiment"
+     style="float: left; margin-right: 10px;" />
+     
 
-![](Airline Company by Sentiment.png)
 ## Modeling
 Some commonly used NLP feature extraction techniques such as CountVectorizer and N-Grams, TF-IDF Vectorizer from Scikit-learn, 
 and Word2Vec from Gensim are explored. Within each framework, we fit classification models such as Random Forest, 
