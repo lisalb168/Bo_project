@@ -8,7 +8,7 @@ website [1].
 ## Data Visualization
 
 
-![Airline Company by Sentiment](Airline Company by Sentiment.jpg)
+![Airline Company by Sentiment](/figures/Airline Company by Sentiment.jpg)
 ## Modeling
 Some commonly used NLP feature extraction techniques such as CountVectorizer and N-Grams, TF-IDF Vectorizer from Scikit-learn, 
 and Word2Vec from Gensim are explored. Within each framework, we fit classification models such as Random Forest, 
@@ -19,9 +19,9 @@ validation score will be compared among different feature model combinations.
 
 
 ## Further Readings
-Link to the data source:
+Link to the data source:\newline
 https://www.figure-eight.com/data-for-everyone/
 
-Link to the full report and ppt slides:
+Link to the full report and ppt slides:\newline
 https://github.com/lisalb168/Bo_project/tree/master/capstone%20project%202/report
 
