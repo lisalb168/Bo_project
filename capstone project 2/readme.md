@@ -21,9 +21,6 @@ validation score will be compared among different feature model combinations.
 ## Further Readings
 Link to the data source:
 [1] (https://www.figure-eight.com/)
-Link to the full report:
-[2] (https://github.com/lisalb168/Bo_project)
-Link to ppt slides:
-[3] (https://github.com/lisalb168/Bo_project)
-
+Link to the full report and ppt slides:
+[2] (https://github.com/lisalb168/Bo_project/tree/master/capstone%20project%202/report)
 
