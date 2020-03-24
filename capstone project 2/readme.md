@@ -8,7 +8,7 @@ website [1].
 ## Data Visualization
 
 
-![alt text](image.jpg)
+![Airline Company by Sentiment](Airline Company by Sentiment.jpg)
 ## Modeling
 Some commonly used NLP feature extraction techniques such as CountVectorizer and N-Grams, TF-IDF Vectorizer from Scikit-learn, 
 and Word2Vec from Gensim are explored. Within each framework, we fit classification models such as Random Forest, 
