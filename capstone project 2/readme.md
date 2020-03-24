@@ -8,7 +8,7 @@ website in the url given in the last section.
 ## Data Visualization
 
 
-<img src="Airline Company by Sentiment.png"
+<img src="https://github.com/lisalb168/Bo_project/blob/master/capstone%20project%202/figures/Airline%20Company%20by%20Sentiment.png"
      alt="Airline Company by Sentiment"
      style="float: left; margin-right: 10px;" />
      
