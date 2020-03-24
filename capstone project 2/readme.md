@@ -8,7 +8,7 @@ website [1].
 ## Data Visualization
 
 
-
+![alt text](image.jpg)
 ## Modeling
 Some commonly used NLP feature extraction techniques such as CountVectorizer and N-Grams, TF-IDF Vectorizer from Scikit-learn, 
 and Word2Vec from Gensim are explored. Within each framework, we fit classification models such as Random Forest, 
@@ -19,6 +19,11 @@ validation score will be compared among different feature model combinations.
 
 
 ## Further Readings
-[1] 
+Link to the data source:
+[1] (https://www.figure-eight.com/)
+Link to the full report:
+[2] (https://github.com/lisalb168/Bo_project)
+Link to ppt slides:
+[3] (https://github.com/lisalb168/Bo_project)
 
 
