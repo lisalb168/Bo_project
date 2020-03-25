@@ -22,5 +22,5 @@ Link to the data source:
 https://www.kaggle.com/c/home-credit-default-risk/data
 
 Link to the full report and ppt slides:  
-https://github.com/lisalb168/Bo_project/tree/master/capstone%20project%201/notebook
+https://github.com/lisalb168/Bo_project/tree/master/capstone%20project%201/reports
 
