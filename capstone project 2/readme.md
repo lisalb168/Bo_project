@@ -16,12 +16,9 @@ A visual inspection shows that majority of the sentiments are negative.
      style="float: left; margin-right: 10px;" />
         
 ## Modeling
-Some commonly used NLP feature extraction techniques such as CountVectorizer and N-Grams, TF-IDF Vectorizer from Scikit-learn, 
-and Word2Vec from Gensim are explored. Within each framework, we fit classification models such as Random Forest, 
-Multinomial Naïve Bayes, LightGBM and Logistic regression with regularizations. For each feature model combination, 
-the same pre-defined 5-fold cross validation object is passed to RandomizedSearchCV in Scikit-learn on the training 
-set to select the best combination of hyperparameters, the 5 validation accuracy scores will be recorded and average 
-validation score will be compared among different feature model combinations.
+Some commonly used NLP feature extraction techniques such as CountVectorizer and N-Grams, TF-IDF Vectorizer, and Word2Vec 
+are explored. Within each framework, we fit classification models such as Random Forest, Multinomial Naïve Bayes, 
+LightGBM and Logistic regression with regularizations. For each feature model combination, the same pre-defined 5-fold cross validation object is passed to RandomizedSearchCV in Scikit-learn on the training set to select the best combination of hyperparameters, the 5 validation accuracy scores will be recorded and average validation score will be compared among different feature model combinations.
 
 ## Further Readings
 Link to the data source:  
