@@ -11,9 +11,9 @@ There are 5 relavent datasets containing the historical loan terms, payments, de
      style="float: left; margin-right: 10px;" />
         
 ## Modeling
-Some commonly used NLP feature extraction techniques such as CountVectorizer and N-Grams, TF-IDF Vectorizer, and Word2Vec 
-are explored. Within each framework, we fit classification models such as Random Forest, Multinomial Naïve Bayes, 
-LightGBM and Logistic regression with regularizations. For each feature model combination, the same pre-defined 5-fold cross validation object is passed to RandomizedSearchCV in Scikit-learn on the training set to select the best combination of hyperparameters, the 5 validation accuracy scores will be recorded and average validation score will be compared among different feature model combinations.
+We explored 6 commonly used classification models including tree-based methods such as Random Forest, XGboost and LightGBM, as well as classical models such as Logistic regression with regularization, K-nearest neighbors (KNN) and support vector machine / classifier (SVM). For each model, first a K-fold CV with RandomizedSearchCV is run on the training set to select the best combination of parameters using accuracy as criteria. Next, each model is fit on the entire training set using the chosen best parameters, and performance metrics such as accuracy, confusion matrix and AUC are reported. Finally, we applied the best selected model to the test dataset and reported the accuracy measures.
+
+
 
 ## Further Readings
 Link to the data source:  
