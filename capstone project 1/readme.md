@@ -13,8 +13,8 @@ There are 5 relavent datasets containing the historical loan terms, payments, de
 ## Modeling
 We explored 6 commonly used classification models including tree-based methods such as Random Forest, XGboost and LightGBM, as well as classical models such as Logistic regression with regularization, K-nearest neighbors (KNN) and support vector machine / classifier (SVM). For each model, first a K-fold CV with RandomizedSearchCV is run on the training set to select the best combination of parameters using accuracy as criteria. Next, each model is fit on the entire training set using the chosen best parameters, and performance metrics such as accuracy, confusion matrix and AUC are reported. Finally, we applied the best selected model to the test dataset and reported the accuracy measures.
 
-<img src="https://github.com/lisalb168/Bo_project/blob/master/capstone%20project%202/figures/Airline%20Company%20by%20Sentiment.png"
-     alt="Airline Company by Sentiment"
+<img src="https://github.com/lisalb168/Bo_project/blob/master/capstone%20project%201/figures/Model%20Performance.png"
+     alt="Model Performance"
      style="float: left; margin-right: 10px;" />
 
 ## Further Readings
