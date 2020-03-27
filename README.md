@@ -1,2 +1,2 @@
-# Bo_project
-Contains all Springboard course projects
+# Projects
+This folder contains all Springboard course projects, including mini projects and 2 capstone projects.
